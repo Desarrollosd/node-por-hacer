@@ -2,6 +2,7 @@ const fs = require('fs');
 
 
 let listadoPorHacer = [];
+//let resultadoArray = [];
 
 const guardarDB = () => {
     let data = JSON.stringify(listadoPorHacer);
@@ -23,9 +24,26 @@ const cargarDB = () => {
     }
 }
 
-const getListado = () => {
+const getListado = (mostrar = 'ALL') => {
+
     cargarDB();
-    return listadoPorHacer;
+    let resultadoArray = [];
+    console.log(listadoPorHacer);
+    if (mostrar === 'DONE') {
+        let resultadoArray = listadoPorHacer.filter(tarea => {
+            return tarea.completado === true;
+        });
+        console.log('DONE');
+        return resultadoArray;
+    } else if (mostrar === 'TODO') {
+        let resultadoArray = listadoPorHacer.filter(tarea => tarea.completado === false);
+        console.log('TODO');
+        return resultadoArray;
+    } else {
+        console.log('ALL');
+        let resultadoArray = listadoPorHacer;
+        return resultadoArray;
+    }
 }
 
 const actualizar = (descripcion, completado = true) => {

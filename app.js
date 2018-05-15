@@ -12,9 +12,7 @@ switch (comando) {
         console.log(tarea);
         break;
     case 'listar':
-
-
-        let listado = porHacer.getListado();
+        let listado = porHacer.getListado(argv.mostrar);
 
         for (let tarea of listado) {
             console.log('=====Por Hacer ====='.green);
@@ -22,7 +20,6 @@ switch (comando) {
             console.log('Estado:', tarea.completado);
             console.log('====================\n'.green);
         }
-
         break;
     case 'actualizar':
         let actualizado = porHacer.actualizar(argv.descripcion, argv.completado);
